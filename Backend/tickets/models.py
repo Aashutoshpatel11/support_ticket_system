@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Ticket(models.Model):
-    Category_choices= [
+    category_choices= [
         ('billing', 'Billing'),
         ('technical', 'Technical'),
         ('account', 'Account'),
@@ -25,15 +25,15 @@ class Ticket(models.Model):
     description = models.TextField()
     category = models.CharField(
         max_length=20,
-        choices=Category_choices.choices,
+        choices=category_choices,
     )
     priority = models.CharField(
         max_length=20,
-        choices=priority_choices.choices,
+        choices=priority_choices,
     )
     status = models.CharField(
         max_length=20,
-        choices=status_choices.choices,
+        choices=status_choices,
         default='open',
     )
     created_at = models.DateTimeField(auto_now_add=True)
