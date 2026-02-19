@@ -9,6 +9,8 @@ from django.utils.timezone import now
 from .models import Ticket
 from .serializers import TicketSerializer
 
+from .llm_service import classify_ticket_description 
+
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
@@ -65,4 +67,19 @@ class TicketViewSet(viewsets.ModelViewSet):
         }
         return Response(response_data)
 
-    
+    @action(detail=False, methods=['post'])
+    def classify(self, request):
+        """
+        Receives a description, calls the LangChain LLM service,
+        and returns the suggested category and priority.
+        """
+        description = request.data.get('description', '')
+        if not description:
+            return Response(
+                {"error": "Description is required"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        suggestions = classify_ticket_description(description)
+        
+        return Response(suggestions, status=status.HTTP_200_OK)
