@@ -58,4 +58,4 @@ Gemini 2.5 Flash is highly optimized for fast, cost-effective reasoning and text
 
 ## Development Notes
 * **Known limitations**: Currently, the system uses SQLite, which is ideal for local development but may need to be migrated to PostgreSQL for production environments. 
-* **Next Steps**: Implementation of user authentication (e.g., JWT) to separate Customer and Support Agent views, and adding comprehensive unit testing for the LLM parsing logic.
+* **Next Steps**: Implementation of user authentication (e.g., JWT) to separate Customer and Support Agent views, and adding comprehensive unit testing for the LLM parsing logic. 
